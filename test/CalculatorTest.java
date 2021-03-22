@@ -46,4 +46,17 @@ class CalculatorTest {
         int numString = calc.add("5 ,6 , 7 ");
         assertEquals(numString,18);
     }
+
+    @Test
+    @DisplayName("Allow the add method to handle new lines between numbers")
+    void testAddMethodWithLinesDelimiters(){
+        int numString = calc.add("1 ,2 , 3\n1 ");
+        assertEquals(numString,7);
+    }
+    @Test
+    @DisplayName("Allow the add method to handle new lines between numbers and new line comes after comma")
+    void testAddMethodWithLines(){
+        int numString = calc.add("1 ,2 , 3\n1,\n ");
+        assertEquals(numString,7);
+    }
 }
