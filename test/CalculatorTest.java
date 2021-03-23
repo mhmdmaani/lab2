@@ -74,5 +74,16 @@ class CalculatorTest {
         assertEquals(numString,8);
     }
      */
-
+    @Test
+    @DisplayName("negative numbers are not allowed")
+    void testAddMethodWithNegativeNumbers(){
+        RuntimeException exeption = null;
+        try{
+            int numString = calc.add("//;-1 ,-2 , 3\n1,\n ;1");
+        }catch( RuntimeException ex){
+            exeption = ex;
+        }
+        assertNotNull(exeption);
+        assertEquals(exeption.getMessage(),"Negatives are not allowed [-1, -2]");
+    }
 }
