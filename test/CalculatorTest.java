@@ -59,4 +59,20 @@ class CalculatorTest {
         int numString = calc.add("1 ,2 , 3\n1,\n ");
         assertEquals(numString,7);
     }
+
+    @Test
+    @DisplayName("To change a delimiter, the beginning of the string will contain a separate line")
+    void testAddMethodWithLines2(){
+        int numString = calc.add("//;1 ,2 , 3\n1,\n ;1");
+        assertEquals(numString,8);
+    }
+    /*
+    @Test
+    @DisplayName("To change a delimiter, the beginning of the string will contain a separate line")
+    void testAddMethodWithLines3(){
+        int numString = calc.add("//;1 ,2 // 3\n1,\n ;1");
+        assertEquals(numString,8);
+    }
+     */
+
 }
