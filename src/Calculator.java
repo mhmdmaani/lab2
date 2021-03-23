@@ -15,7 +15,8 @@ public class Calculator extends Exception {
                 int num1 = Integer.parseInt(num.trim());
                 if(num1<0){
                    negativeNumbers.add(num1);
-                }else{
+
+                }else if(num1<=1000){
                     sum += num1;
                 }
 
