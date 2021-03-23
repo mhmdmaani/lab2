@@ -100,5 +100,12 @@ class CalculatorTest {
         int numString = calc.add("//[***]\n1***2***3");
         assertEquals(numString,6);
     }
-    //[***]\n1***2***3
+   //“//[*]
+    //[%]\n1*2%3
+   @Test
+   @DisplayName("Allow multiple delimiters like this: “//[delim1][delim2]\n”")
+   void testAddMethodWithMultiDelimeters(){
+       int numString = calc.add("//[*]\n//[%]\n1*2%3");
+       assertEquals(numString,6);
+   }
 }

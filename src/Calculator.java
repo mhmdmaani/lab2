@@ -8,7 +8,7 @@ public class Calculator extends Exception {
         if (numbers.length() == 0) {
             return 0;
         }
-        String[] numbersStrings = numbers.split("[,\n //;*]");
+        String[] numbersStrings = numbers.split("[,\n //;*%]");
         ArrayList<Integer> negativeNumbers = new ArrayList<Integer>();
         for (String num : numbersStrings) {
             try {
