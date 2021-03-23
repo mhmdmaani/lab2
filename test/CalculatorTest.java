@@ -92,4 +92,13 @@ class CalculatorTest {
         int numString = calc.add("//;1001 ,2 , 3\n1,\n ;1");
         assertEquals(numString,7);
     }
+
+
+    @Test
+    @DisplayName("Delimiters can be of any length with the following format: “//[delimiter]\n”")
+    void testAddMethodWithDelimiterAnyLength(){
+        int numString = calc.add("//[***]\n1***2***3");
+        assertEquals(numString,6);
+    }
+    //[***]\n1***2***3
 }
