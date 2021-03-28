@@ -3,11 +3,11 @@ package example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeRepositoryTest implements EmployeeRepository {
+public class EmployeeRepositoryImp implements EmployeeRepository {
 
     public static List<Employee> employees = new ArrayList<Employee>();
 
-    public  EmployeeRepositoryTest(List<Employee> employees){
+    public  EmployeeRepositoryImp(List<Employee> employees){
         this.employees=employees;
     }
     @Override

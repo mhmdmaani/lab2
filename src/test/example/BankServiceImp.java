@@ -1,6 +1,6 @@
 package example;
 
-public class BankServiceTest implements BankService {
+public class BankServiceImp implements BankService {
     @Override
     public void pay(String id, double amount) {
 

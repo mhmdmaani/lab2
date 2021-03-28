@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
 class EmployeeManagerTest {
@@ -30,14 +32,14 @@ class EmployeeManagerTest {
     @Test
     @DisplayName("Test payEmployees when employee repo have more than one and the connection with bankService is ok")
     void testPayEmployee(){
-      EmployeeRepository repo = mock(EmployeeRepository.class);
-      when(repo.findAll()).thenReturn(List.of(
-              new Employee("123",25000),
-              new Employee("223",30000)
-      ));
-      BankService bankService = mock(BankService.class);
-      doNothing().when(bankService).pay(isA(String.class),isA(Double.class));
-       int payments = (new EmployeeManager(repo,bankService)).payEmployees();
+        EmployeeRepository repo = mock(EmployeeRepository.class);
+        when(repo.findAll()).thenReturn(List.of(
+                new Employee("123",25000),
+                new Employee("223",30000)
+        ));
+        BankService bankService = mock(BankService.class);
+        doNothing().when(bankService).pay(isA(String.class),isA(Double.class));
+        int payments = (new EmployeeManager(repo,bankService)).payEmployees();
         verify(bankService,times(2)).pay(isA(String.class),isA(Double.class));
         verify(repo,times(1)).findAll();
 
@@ -48,7 +50,6 @@ class EmployeeManagerTest {
 
         assertThat(payments).isEqualTo(2);
     }
-
     @Test
     @DisplayName("Test payEmployees when employee repo have more than one and the connection with bankService is failed")
     void testPayEmployeeWithFailBankServiceConnection(){
@@ -75,10 +76,10 @@ class EmployeeManagerTest {
     @Test
     @DisplayName("Test payEmployees when Employees array is Empty using Test doubles")
     void testPayMethodUsingDoublesWhenEmployeesIsEmpty(){
-        EmployeeRepositoryTest employeeRepositoryTest = new EmployeeRepositoryTest(new ArrayList<Employee>());
-        BankServiceTest bankServiceTest = new BankServiceTest();
+        EmployeeRepositoryImp employeeRepositoryTest = new EmployeeRepositoryImp(new ArrayList<Employee>());
+        BankServiceImp bankServiceImp = new BankServiceImp();
 
-        EmployeeManager employeeManager = new EmployeeManager(employeeRepositoryTest,bankServiceTest);
+        EmployeeManager employeeManager = new EmployeeManager(employeeRepositoryTest, bankServiceImp);
 
         int  actualPayment = employeeManager.payEmployees();
         int expectedPayment = 0;
@@ -94,10 +95,10 @@ class EmployeeManagerTest {
         employeesList.add(new Employee("2",45000));
         employeesList.add(new Employee("3",80000));
 
-        EmployeeRepositoryTest employeeRepositoryTest = new EmployeeRepositoryTest(employeesList);
-        BankServiceTest bankServiceTest = new BankServiceTest();
+        EmployeeRepositoryImp employeeRepositoryTest = new EmployeeRepositoryImp(employeesList);
+        BankServiceImp bankServiceImp = new BankServiceImp();
 
-        EmployeeManager employeeManager = new EmployeeManager(employeeRepositoryTest,bankServiceTest);
+        EmployeeManager employeeManager = new EmployeeManager(employeeRepositoryTest, bankServiceImp);
 
         int  actualPayment = employeeManager.payEmployees();
         int expectedPayment = 3;
@@ -105,4 +106,5 @@ class EmployeeManagerTest {
         assertThat(actualPayment).isEqualTo(expectedPayment);
         assertThat(employeesList.get(0).isPaid()).isEqualTo(true);
     }
+
 }
